@@ -3,7 +3,7 @@ LABEL maintainer="Thomas Steinbach"
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-         python-software-properties \
+         python3-software-properties \
          software-properties-common \
          rsyslog \
          systemd \
