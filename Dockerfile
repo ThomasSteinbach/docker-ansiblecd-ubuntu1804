@@ -17,7 +17,7 @@ RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 
 COPY initctl_faker.sh .
 
-RUN chmod +x initctl_faker && \
+RUN chmod +x initctl_faker.sh && \
     rm -fr /sbin/initctl && \
     ln -s /initctl_faker.sh /sbin/initctl
 
