@@ -1,17 +1,35 @@
 FROM ubuntu:18.04
-LABEL maintainer="Thomas Steinbach"
+MAINTAINER Thomas Steinbach
+# with credits upstream: https://hub.docker.com/r/geerlingguy/docker-ubuntu1604-ansible/
+# with credits upstream: https://github.com/naftulikay/docker-xenial-vm.git
+# with credits to https://developers.redhat.com/blog/2014/05/05/running-systemd-within-docker-container/
+
+ENV container=docker
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
          python3-software-properties \
          software-properties-common \
+         dbus \
          rsyslog \
          systemd \
          systemd-cron \
          sudo \
-    && rm -Rf /var/lib/apt/lists/* \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean
+
+RUN \
+    rm -f /usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service; \
+    rm -f /etc/systemd/system/*.wants/*; \
+    rm -f /lib/systemd/system/sysinit.target.wants/systemd-tmpfiles-setup.service; \
+    rm -f /lib/systemd/system/multi-user.target.wants/*; \
+    rm -f /lib/systemd/system/local-fs.target.wants/*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+    rm -f /lib/systemd/system/basic.target.wants/*; \
+    rm -f /lib/systemd/system/anaconda.target.wants/*;
+
+RUN ln -s /usr/bin/python3 /usr/bin/python
 
 RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 
