@@ -39,4 +39,8 @@ RUN chmod +x initctl_faker.sh && \
     rm -fr /sbin/initctl && \
     ln -s /initctl_faker.sh /sbin/initctl
 
+# custom utility for awaiting systemd "boot" in the container
+COPY bin/systemd-await-target /usr/bin/systemd-await-target
+COPY bin/wait-for-boot /usr/bin/wait-for-boot
+
 ENTRYPOINT ["/lib/systemd/systemd"]
