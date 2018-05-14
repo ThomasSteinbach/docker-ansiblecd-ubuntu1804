@@ -43,4 +43,5 @@ RUN chmod +x initctl_faker.sh && \
 COPY bin/systemd-await-target /usr/bin/systemd-await-target
 COPY bin/wait-for-boot /usr/bin/wait-for-boot
 
+VOLUME ["/sys/fs/cgroup"]
 ENTRYPOINT ["/lib/systemd/systemd"]
