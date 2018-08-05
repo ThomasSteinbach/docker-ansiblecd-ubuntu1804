@@ -9,6 +9,6 @@ stages:
 build:
   stage: build
   script:
-    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; do IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_NAME"; done
+    - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_NAME"; fi
     - IMAGE_NAME="${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${IMAGE_TAG}"
     - echo "Build $IMAGE_NAME"
