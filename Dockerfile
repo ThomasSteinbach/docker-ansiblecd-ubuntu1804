@@ -21,7 +21,7 @@ RUN apt-get update \
     && apt-get clean
 
 # Ansible
-RUN pip install ansible==2.6.2
+RUN pip3 install ansible==2.6.2
 RUN mkdir -p /etc/ansible
 RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
 
