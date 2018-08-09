@@ -20,7 +20,8 @@ RUN apt-get update \
          sudo \
          docker.io \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
-    && apt-get clean
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Ansible
 RUN pip3 install ansible==2.6.2
