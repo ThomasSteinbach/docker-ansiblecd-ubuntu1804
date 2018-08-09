@@ -11,7 +11,8 @@ before_script:
 
 lint:
   stage: lint
-  script: docker run --rm -i hadolint/hadolint hadolint --ignore DL3008 - < Dockerfile
+  image: hadolint/hadolint:latest
+  script: hadolint --ignore DL3008 "build-env/Dockerfile"
 
 build:
   stage: build
