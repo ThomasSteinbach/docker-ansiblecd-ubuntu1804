@@ -1,5 +1,6 @@
 FROM ubuntu:18.04
-MAINTAINER Thomas Steinbach
+LABEL maintainer="Thomas Steinbach"
+
 # with credits upstream: https://hub.docker.com/r/geerlingguy/docker-ubuntu1804-ansible/
 # with credits upstream: https://github.com/naftulikay/docker-xenial-vm.git
 # with credits to https://developers.redhat.com/blog/2014/05/05/running-systemd-within-docker-container/
@@ -24,7 +25,7 @@ RUN apt-get update \
 # Ansible
 RUN pip3 install ansible==2.6.2
 RUN mkdir -p /etc/ansible
-RUN echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts
+RUN printf '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 
 # disable kernel logging
 RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
