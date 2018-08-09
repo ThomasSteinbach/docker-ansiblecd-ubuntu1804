@@ -1,8 +1,5 @@
 image: docker:latest
 
-services:
-  - docker:stable-dind
-
 stages:
   - build
   - test
