@@ -11,8 +11,7 @@ before_script:
 
 lint:
   stage: lint
-  image: hadolint/hadolint
-  script: /bin/hadolint Dockerfile
+  script: docker run --rm -i hadolint/hadolint < Dockerfile
 
 build:
   stage: build
