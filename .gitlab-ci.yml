@@ -1,6 +1,7 @@
 image: docker:latest
 
 stages:
+  - lint
   - build
   - test
 
@@ -8,10 +9,15 @@ before_script:
   - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_NAME"; fi
   - IMAGE_NAME="${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${IMAGE_TAG}"
 
+lint:
+  stage: lint
+  image: hadolint/hadolint
+  script: /bin/hadolint Dockerfile
+
 build:
   stage: build
   script: docker build --pull -t "${IMAGE_NAME}" .
 
 test:
   stage: test
-  script: docker run --rm "${IMAGE_NAME}" ansible --version
+  script: docker run --rm --entrypoint ansible "${IMAGE_NAME}" --version
