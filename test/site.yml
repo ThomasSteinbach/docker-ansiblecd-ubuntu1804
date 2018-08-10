@@ -13,7 +13,7 @@
     - name: start docker
       service:
         name: docker
-        state: running
+        state: started
 
     - name: test docker
       command: docker ps
@@ -21,4 +21,4 @@
 
     - name: log docker execution
       debug:
-        var: result
+        var: result.stdout
