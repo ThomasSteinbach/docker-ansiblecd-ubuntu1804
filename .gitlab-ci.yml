@@ -21,4 +21,5 @@ build:
 test:
   stage: test
   image: "${BUILD_IMAGE}"
+  pull_policy: never
   script: ansible-playbook test/site.yml
