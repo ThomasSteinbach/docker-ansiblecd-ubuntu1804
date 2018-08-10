@@ -20,5 +20,7 @@ build:
 
 test:
   stage: test
+  variables:
+    PLAYBOOK_FILE: '/test/site.yml'
   image: "$CI_REGISTRY_IMAGE"
-  script: test
+  script: echo "Finished Playbook Test"

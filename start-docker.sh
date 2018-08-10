@@ -2,10 +2,14 @@
 
 /lib/systemd/systemd
 
-echo "$@"
+set -e
 
-if [ -f "$1/requirements.yml" ]; then
-  ansible-galaxy install -r "$1/requirements.yml"
+PLAYBOOK_FILE=${PLAYBOOK_FILE:-site.yml}
+
+if [ -z "$REQUIREMENTS_FILE" ]; then
+  ansible-galaxy install -r "${REQIREMENTS_FILE}"
 fi
 
-ansible-playbook "$1/site.yml"
+ansible-playbook "${PLAYBOOK_FILE}"
+
+exec "$@"
