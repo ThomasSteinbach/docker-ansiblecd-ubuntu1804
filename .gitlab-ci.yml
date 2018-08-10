@@ -21,8 +21,9 @@ lint:
 
 build:
   stage: build
-  script: docker build --pull -t <<: *int_img_name .
+  script: docker build --pull -t "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}" .
 
 test:
   stage: test
-  script: docker run --rm --entrypoint ansible "${IMAGE_NAME}" --version
+  image: "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}"
+  script: ansible-playbook test/site.yml

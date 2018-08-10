@@ -1,0 +1,6 @@
+- name: simple test playbook
+  hosts: localhost
+  tasks:
+    - name: simple debug task
+      debug:
+        msg: "did everything work as expected?"
