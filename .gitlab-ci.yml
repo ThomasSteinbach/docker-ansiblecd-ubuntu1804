@@ -6,14 +6,7 @@ stages:
   - test
 
 variables:
-  BUILD_IMAGE: "${CI_PROJECT_PATH/docker-/}:${CI_COMMIT_REF_NAME}"
-
-before_script:
-  - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_NAME"; fi
-  - IMAGE_NAME="${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${IMAGE_TAG}"
-
-.internal_image_name: &int_img_name
-  "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}"
+  BUILD_IMAGE: "${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}"
 
 lint:
   stage: lint
@@ -21,12 +14,11 @@ lint:
             --ignore DL3008
             --ignore SC2016
             - < Dockerfile
-
 build:
   stage: build
-  script: docker build --pull -t "${BUILD_IMAGE}-test" .
+  script: docker build --pull -t "${BUILD_IMAGE}" .
 
 test:
   stage: test
-  image: "${BUILD_IMAGE}-test"
+  image: "${BUILD_IMAGE}"
   script: ansible-playbook test/site.yml
