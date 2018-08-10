@@ -1,2 +1,3 @@
+#!/bin/sh
 /lib/systemd/systemd
-/bin/sh -c "$@"
+exec "$@"
