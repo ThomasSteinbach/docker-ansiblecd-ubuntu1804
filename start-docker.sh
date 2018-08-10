@@ -12,4 +12,6 @@ fi
 
 ansible-playbook "${PLAYBOOK_FILE}"
 
+echo "$@"
+
 exec "$@"

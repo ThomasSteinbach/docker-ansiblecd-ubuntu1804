@@ -21,6 +21,7 @@ build:
 test:
   stage: test
   variables:
-    PLAYBOOK_FILE: '/test/site.yml'
+    PLAYBOOK_FILE: 'test/site.yml'
   image: "$CI_REGISTRY_IMAGE"
-  script: echo "Finished Playbook Test"
+  script:
+    - echo "Finished Playbook Test"
