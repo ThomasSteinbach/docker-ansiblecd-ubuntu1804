@@ -21,7 +21,7 @@ lint:
 
 build:
   stage: build
-  script: docker build --pull -t *int_img_name .
+  script: docker build --pull -t <<: *int_img_name .
 
 test:
   stage: test
