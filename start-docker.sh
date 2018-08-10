@@ -3,6 +3,7 @@
 /lib/systemd/systemd
 
 pwd
+ls -l
 echo "$@"
 
 set -e
@@ -14,5 +15,3 @@ if [ -z "$REQUIREMENTS_FILE" ]; then
 fi
 
 ansible-playbook "${PLAYBOOK_FILE}"
-
-exec "$@"
