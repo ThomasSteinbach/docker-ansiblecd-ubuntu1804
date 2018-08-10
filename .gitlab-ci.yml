@@ -4,8 +4,9 @@ stages:
   - lint
   - build
   - test
+  - publish
 
-lint:
+hadolint:
   stage: lint
   script: docker run --rm -i hadolint/hadolint hadolint
             --ignore DL3008
@@ -15,12 +16,21 @@ build:
   stage: build
   script:
     - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
-    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
-    - docker push "$CI_REGISTRY_IMAGE"
+    - docker build --pull -t "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" .
+    - docker push "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
 
-test:
+playbook-run:
   stage: test
   variables:
     PLAYBOOK_FILE: "test/site.yml"
-  image: "$CI_REGISTRY_IMAGE"
+  image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
   script: run-all-tests
+
+dockerhub:
+  statge: publish
+  script:
+    - if [ "$CI_COMMIT_REF_SLUG" == "master" ]; then IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_SLUG"; fi
+    - IMAGE_NAME="${GITLAB_SECRET_DOCKER_USER}/${CI_PROJECT_NAME/docker-/}:${IMAGE_TAG}"
+    - docker tag "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}" "$IMAGE_NAME"
+    - docker login -u "$GITLAB_SECRET_DOCKER_USER" -p "$GITLAB_SECRET_DOCKER_PASSWORD"
+    - docker push "$IMAGE_NAME"
