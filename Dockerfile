@@ -54,4 +54,6 @@ COPY bin/systemd-await-target /usr/bin/systemd-await-target
 COPY bin/wait-for-boot /usr/bin/wait-for-boot
 
 VOLUME ["/sys/fs/cgroup"]
-#ENTRYPOINT ["/lib/systemd/systemd"]
+
+COPY start-docker.sh /usr/local/bin/start-docker.sh
+ENTRYPOINT ["/usr/local/bin/start-docker.sh"]
