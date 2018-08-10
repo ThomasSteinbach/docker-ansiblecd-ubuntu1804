@@ -23,5 +23,4 @@ test:
   variables:
     PLAYBOOK_FILE: "${CI_PROJECT_DIR}/test/site.yml"
   image: "$CI_REGISTRY_IMAGE"
-  script:
-    - Dummy Script
+  script: run-all-tests

@@ -55,5 +55,6 @@ COPY bin/wait-for-boot /usr/bin/wait-for-boot
 
 VOLUME ["/sys/fs/cgroup"]
 
-COPY start-docker.sh /usr/local/bin/start-docker.sh
-ENTRYPOINT ["/usr/local/bin/start-docker.sh"]
+COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
+COPY scripts/run-all-tests /usr/local/bin/run-all-tests
+CMD ["/usr/local/bin/start-docker.sh"]
