@@ -18,6 +18,7 @@ RUN apt-get update \
          systemd \
          systemd-cron \
          sudo \
+         docker.io \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
