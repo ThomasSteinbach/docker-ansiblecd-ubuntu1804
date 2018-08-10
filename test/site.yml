@@ -4,3 +4,21 @@
     - name: simple debug task
       debug:
         msg: "did everything work as expected?"
+
+    - name: install docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: start docker
+      service:
+        name: docker
+        state: running
+
+    - name: test docker
+      command: docker ps
+      register: result
+
+    - name: log docker execution
+      debug:
+        var: result
