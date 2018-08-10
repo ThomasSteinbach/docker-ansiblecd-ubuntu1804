@@ -5,9 +5,6 @@ stages:
   - build
   - test
 
-before_script:
-  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-
 lint:
   stage: lint
   script: docker run --rm -i hadolint/hadolint hadolint
@@ -17,6 +14,7 @@ lint:
 build:
   stage: build
   script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
 
