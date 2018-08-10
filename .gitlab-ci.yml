@@ -5,6 +5,9 @@ stages:
   - build
   - test
 
+variables:
+  BUILD_IMAGE: "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}"
+
 before_script:
   - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_NAME"; fi
   - IMAGE_NAME="${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${IMAGE_TAG}"
@@ -21,9 +24,9 @@ lint:
 
 build:
   stage: build
-  script: docker build --pull -t "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}" .
+  script: docker build --pull -t "${BUILD_IMAGE}-test" .
 
 test:
   stage: test
-  image: "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}"
+  image: "${BUILD_IMAGE}-test"
   script: ansible-playbook test/site.yml
