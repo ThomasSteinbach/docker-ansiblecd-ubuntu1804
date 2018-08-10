@@ -6,7 +6,7 @@ stages:
   - test
 
 variables:
-  BUILD_IMAGE: "${CI_PROJECT_NAMESPACE}/${CI_PROJECT_NAME/docker-/}:${CI_COMMIT_REF_NAME}"
+  BUILD_IMAGE: "${CI_PROJECT_PATH/docker-/}:${CI_COMMIT_REF_NAME}"
 
 before_script:
   - if [ "$CI_COMMIT_REF_NAME" == "master" ]; then IMAGE_TAG="latest"; else IMAGE_TAG="$CI_COMMIT_REF_NAME"; fi
