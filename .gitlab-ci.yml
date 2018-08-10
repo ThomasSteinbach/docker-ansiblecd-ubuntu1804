@@ -5,8 +5,8 @@ stages:
   - build
   - test
 
-variables:
-  BUILD_IMAGE: "${CI_PROJECT_PATH}:${CI_COMMIT_REF_NAME}"
+    #before_script:
+    #  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
 
 lint:
   stage: lint
@@ -16,10 +16,12 @@ lint:
             - < Dockerfile
 build:
   stage: build
-  script: docker build --pull -t "${BUILD_IMAGE}" .
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+    - 
 
 test:
   stage: test
-  image: "${BUILD_IMAGE}"
-  pull_policy: never
+  image: "$CI_REGISTRY_IMAGE"
   script: ansible-playbook test/site.yml
