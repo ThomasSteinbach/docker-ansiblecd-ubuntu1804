@@ -2,10 +2,6 @@
 
 /lib/systemd/systemd
 
-pwd
-ls -l
-echo "$@"
-
 set -e
 
 PLAYBOOK_FILE=${PLAYBOOK_FILE:-site.yml}

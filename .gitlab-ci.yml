@@ -21,6 +21,6 @@ build:
 test:
   stage: test
   variables:
-    PLAYBOOK_FILE: "${CI_PROJECT_DIR}/test/site.yml"
+    PLAYBOOK_FILE: "test/site.yml"
   image: "$CI_REGISTRY_IMAGE"
   script: run-all-tests
