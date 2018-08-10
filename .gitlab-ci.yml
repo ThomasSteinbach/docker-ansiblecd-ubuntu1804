@@ -21,4 +21,4 @@ build:
 test:
   stage: test
   image: "$CI_REGISTRY_IMAGE"
-  script: ansible-playbook test/site.yml
+  script: test
