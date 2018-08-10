@@ -2,6 +2,9 @@
 
 /lib/systemd/systemd
 
+pwd
+echo "$@"
+
 set -e
 
 PLAYBOOK_FILE=${PLAYBOOK_FILE:-site.yml}
@@ -11,7 +14,5 @@ if [ -z "$REQUIREMENTS_FILE" ]; then
 fi
 
 ansible-playbook "${PLAYBOOK_FILE}"
-
-echo "$@"
 
 exec "$@"
