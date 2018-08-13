@@ -19,13 +19,9 @@ RUN apt-get update \
          systemd-cron \
          sudo \
          docker.io \
-         openssh-server \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-RUN adduser --disabled-password --gecos '' ansible && \
-    echo 'ansible:ansible' | chpasswd
 
 # Ansible
 RUN pip3 install ansible==2.6.2
@@ -35,7 +31,16 @@ RUN printf '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 # disable kernel logging
 RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 
-RUN rm -f /usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service
+RUN \
+    rm -f /usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service; \
+    rm -f /etc/systemd/system/*.wants/*; \
+    rm -f /lib/systemd/system/sysinit.target.wants/systemd-tmpfiles-setup.service; \
+    rm -f /lib/systemd/system/multi-user.target.wants/*; \
+    rm -f /lib/systemd/system/local-fs.target.wants/*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*udev*; \
+    rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
+    rm -f /lib/systemd/system/basic.target.wants/*; \
+    rm -f /lib/systemd/system/anaconda.target.wants/*;
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
@@ -52,4 +57,4 @@ VOLUME ["/sys/fs/cgroup"]
 
 COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
 COPY scripts/run-all-tests /usr/local/bin/run-all-tests
-CMD ["/lib/systemd/systemd"]
+CMD ["/usr/local/bin/start-docker.sh"]
