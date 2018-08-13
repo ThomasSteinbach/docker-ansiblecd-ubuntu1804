@@ -24,11 +24,8 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# sshd
-RUN adduser --disabled-password --gecos '' ansible
-RUN echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config
-#RUN systemctl disable sshd
-#RUN systemctl enable ssh
+RUN adduser --disabled-password --gecos '' ansible && \
+    echo 'ansible:ansible' | chpasswd
 
 # Ansible
 RUN pip3 install ansible==2.6.2
@@ -38,8 +35,7 @@ RUN printf '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 # disable kernel logging
 RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
 
-RUN \
-    rm -f /usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service
+RUN rm -f /usr/lib/systemd/system/sysinit.target.wants/systemd-firstboot.service
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
