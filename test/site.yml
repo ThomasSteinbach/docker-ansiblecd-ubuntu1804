@@ -11,7 +11,7 @@
     - name: start sshd
       service:
         name: ssh
-        state: running
+        state: started
 
     - name: test docker
       command: docker ps
