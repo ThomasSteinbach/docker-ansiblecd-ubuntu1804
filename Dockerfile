@@ -19,9 +19,14 @@ RUN apt-get update \
          systemd-cron \
          sudo \
          docker.io \
+         openssh-server \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# sshd
+RUN adduser --disabled-password --gecos '' ansible
+RUN echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config
 
 # Ansible
 RUN pip3 install ansible==2.6.2
