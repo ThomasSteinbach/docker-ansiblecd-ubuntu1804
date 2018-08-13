@@ -27,6 +27,7 @@ RUN apt-get update \
 RUN pip3 install ansible==2.6.2
 RUN mkdir -p /etc/ansible
 RUN printf '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
+COPY ansible/human_log.py /usr/local/lib/python3.6/dist-packages/ansible/plugins/callback/human_log.py
 
 # disable kernel logging
 RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
