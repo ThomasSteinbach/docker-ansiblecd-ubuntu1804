@@ -10,7 +10,7 @@
 
     - name: start sshd
       service:
-        name: sshd
+        name: ssh
         state: running
 
     - name: test docker
