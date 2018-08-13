@@ -2,6 +2,17 @@
   hosts: localhost
   tasks:
 
+    - name: install sshd
+      apt:
+        name: openssh-server
+        state: present
+        update_cache: yes
+
+    - name: start sshd
+      service:
+        name: sshd
+        state: running
+
     - name: test docker
       command: docker ps
       register: result
