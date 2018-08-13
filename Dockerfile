@@ -8,7 +8,7 @@ LABEL maintainer="Thomas Steinbach"
 ENV container=docker
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
          python3-pip \
          python3-software-properties \
          python3-setuptools \
