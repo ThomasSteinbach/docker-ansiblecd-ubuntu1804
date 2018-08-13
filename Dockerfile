@@ -27,7 +27,8 @@ RUN apt-get update \
 # sshd
 RUN adduser --disabled-password --gecos '' ansible
 RUN echo 'PermitEmptyPasswords yes' >> /etc/ssh/sshd_config
-RUN systemctl enable sshd
+RUN systemctl disable sshd
+RUN systemctl enable ssh
 
 # Ansible
 RUN pip3 install ansible==2.6.2
