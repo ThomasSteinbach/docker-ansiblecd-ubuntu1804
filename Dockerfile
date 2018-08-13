@@ -62,4 +62,4 @@ VOLUME ["/sys/fs/cgroup"]
 
 COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
 COPY scripts/run-all-tests /usr/local/bin/run-all-tests
-CMD ["/usr/local/bin/start-docker.sh"]
+CMD ["/var/systemd/systemd"]
