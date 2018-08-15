@@ -1,4 +1,4 @@
-FROM alpine/git
+FROM alpine/git:latest as ansibleci-base
 RUN git clone https://gitlab.xarif.de/thomass/ansibleci-base.git /ansibleci-base
 
 FROM ubuntu:18.04
@@ -71,5 +71,5 @@ VOLUME ["/sys/fs/cgroup"]
 COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
 CMD ["/usr/local/bin/start-docker.sh"]
 
-COPY --from=0 /ansibleci-base /ansibleci-base
+COPY --from=ansibleci-base /ansibleci-base /ansibleci-base
 RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-test
