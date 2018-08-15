@@ -12,11 +12,3 @@
       service:
         name: ssh
         state: started
-
-    - name: test docker
-      command: docker ps
-      register: result
-
-    - name: log docker execution
-      debug:
-        var: result.stdout
