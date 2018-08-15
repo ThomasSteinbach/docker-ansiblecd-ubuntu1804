@@ -35,7 +35,6 @@ RUN apt-get update \
 RUN pip3 install ansible==2.6.2
 RUN mkdir -p /etc/ansible
 RUN printf '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
-COPY ansible/human_log.py /usr/local/lib/python3.6/dist-packages/ansible/plugins/callback/human_log.py
 
 # Inspec
 RUN gem install docker-api -v  1.34.2
@@ -72,4 +71,5 @@ COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
 CMD ["/usr/local/bin/start-docker.sh"]
 
 COPY --from=ansibleci-base /ansibleci-base /ansibleci-base
-RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-tests
+RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-tests && \
+    ln -s /ansibleci-base/ansible-plugins/human_log.py /usr/local/lib/python3.6/dist-packages/ansible/plugins/callback/human_log.py
