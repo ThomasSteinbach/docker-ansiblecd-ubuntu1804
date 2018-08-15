@@ -9,6 +9,7 @@ stages:
 hadolint:
   stage: lint
   script: docker run --rm -i hadolint/hadolint hadolint
+            --ignore DL3007
             --ignore DL3008
             --ignore SC2016
             - < Dockerfile
