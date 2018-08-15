@@ -21,6 +21,8 @@ RUN apt-get update \
          docker.io \
          ruby \
          ruby-dev \
+         build-essential \
+         libssl-dev \
          libffi-dev \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean \
@@ -33,7 +35,8 @@ RUN printf '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts
 COPY ansible/human_log.py /usr/local/lib/python3.6/dist-packages/ansible/plugins/callback/human_log.py
 
 # Inspec
-RUN gem install docker-api inspec
+RUN gem install docker-api -v  1.34.2
+RUN gem install inspec -v  2.2.61
 
 # disable kernel logging
 RUN sed -i 's/^\($ModLoad imklog\)/#\1/' /etc/rsyslog.conf
