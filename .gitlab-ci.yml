@@ -23,7 +23,7 @@ build:
 playbook-run:
   stage: test
   variables:
-    PLAYBOOK_FILE: "test/site.yml"
+    PLAYBOOKDIR: "test"
   image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
   script: run-tests
 
