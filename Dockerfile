@@ -21,6 +21,7 @@ RUN apt-get update \
          docker.io \
          ruby \
          ruby-dev \
+         libffi-dev \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
