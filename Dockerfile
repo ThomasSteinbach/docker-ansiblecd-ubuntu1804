@@ -1,3 +1,6 @@
+FROM alpine/git
+RUN git clone https://gitlab.xarif.de/thomass/ansibleci-base.git /ansibleci-base
+
 FROM ubuntu:18.04
 LABEL maintainer="Thomas Steinbach"
 
@@ -66,5 +69,7 @@ COPY bin/wait-for-boot /usr/bin/wait-for-boot
 VOLUME ["/sys/fs/cgroup"]
 
 COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
-COPY scripts/run-all-tests /usr/local/bin/run-all-tests
 CMD ["/usr/local/bin/start-docker.sh"]
+
+COPY --from=0 /ansibleci-base /ansibleci-base
+RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-test

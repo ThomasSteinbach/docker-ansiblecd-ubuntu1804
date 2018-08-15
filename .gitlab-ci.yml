@@ -24,7 +24,7 @@ playbook-run:
   variables:
     PLAYBOOK_FILE: "test/site.yml"
   image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
-  script: run-all-tests
+  script: run-tests
 
 dockerhub:
   stage: publish
