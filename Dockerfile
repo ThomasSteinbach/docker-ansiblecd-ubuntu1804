@@ -72,4 +72,4 @@ COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
 CMD ["/usr/local/bin/start-docker.sh"]
 
 COPY --from=ansibleci-base /ansibleci-base /ansibleci-base
-RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-test
+RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-tests
