@@ -22,16 +22,16 @@ build:
 
 test-aci-base-playbook:
   stage: test
+  image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
   variables:
     PLAYBOOKDIR: '/ansibleci-base/examples/default'
-  image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
   script: run-tests
 
 test-custom-playbook:
   stage: test
+  image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
   variables:
     PLAYBOOKDIR: "test"
-  image: "${CI_REGISTRY_IMAGE}:${CI_COMMIT_REF_SLUG}"
   script: run-tests
 
 dockerhub:
