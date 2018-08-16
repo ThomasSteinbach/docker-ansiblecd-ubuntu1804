@@ -1,5 +1,4 @@
-FROM alpine/git:latest as ansibleci-base
-RUN git clone https://gitlab.xarif.de/thomass/ansibleci-base.git /ansibleci-base
+FROM thomass/ansibleci-base as ansibleci-base
 
 FROM ubuntu:18.04
 LABEL maintainer="Thomas Steinbach"
