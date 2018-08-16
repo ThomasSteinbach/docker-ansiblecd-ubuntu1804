@@ -1,4 +1,4 @@
-FROM thomass/ansibleci-base as ansibleci-base
+FROM thomass/ansibleci-base:latest as ansibleci-base
 
 FROM ubuntu:18.04
 LABEL maintainer="Thomas Steinbach"
