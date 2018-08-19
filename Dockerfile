@@ -70,5 +70,5 @@ COPY scripts/start-docker.sh /usr/local/bin/start-docker.sh
 CMD ["/usr/local/bin/start-docker.sh"]
 
 COPY --from=ansibleci-base /ansibleci-base /ansibleci-base
-RUN ln -s /ansibleci-base/run-tests.sh /usr/local/bin/run-tests && \
+RUN ln -s /ansibleci-base/scripts/run-tests.sh /usr/local/bin/run-tests && \
     ln -s /ansibleci-base/ansible-plugins/human_log.py /usr/local/lib/python3.6/dist-packages/ansible/plugins/callback/human_log.py
