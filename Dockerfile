@@ -55,14 +55,13 @@ RUN \
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-COPY scripts/initctl_faker.sh .
-RUN chmod +x initctl_faker.sh && \
-    rm -fr /sbin/initctl && \
+COPY files/initctl_faker.sh .
+RUN rm -fr /sbin/initctl && \
     ln -s /initctl_faker.sh /sbin/initctl
 
 # custom utility for awaiting systemd "boot" in the container
-COPY bin/systemd-await-target /usr/bin/systemd-await-target
-COPY bin/wait-for-boot /usr/bin/wait-for-boot
+COPY files/systemd-await-target /usr/bin/systemd-await-target
+COPY files/wait-for-boot /usr/bin/wait-for-boot
 
 VOLUME ["/sys/fs/cgroup"]
 
