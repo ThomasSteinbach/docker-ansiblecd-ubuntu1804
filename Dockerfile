@@ -55,7 +55,7 @@ RUN \
 
 RUN ln -s /usr/bin/python3 /usr/bin/python
 
-COPY initctl_faker.sh .
+COPY scripts/initctl_faker.sh .
 RUN chmod +x initctl_faker.sh && \
     rm -fr /sbin/initctl && \
     ln -s /initctl_faker.sh /sbin/initctl
