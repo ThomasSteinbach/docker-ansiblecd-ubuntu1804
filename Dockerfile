@@ -10,8 +10,6 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-RUN ln -s /usr/bin/python3 /usr/bin/python
-
 RUN mkdir /run/sshd && \
     chmod 0755 /run/sshd
 
