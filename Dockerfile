@@ -5,7 +5,7 @@ RUN apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
          python3 \
          sudo \
-         openssh \
+         ssh \
     && rm -Rf /usr/share/doc && rm -Rf /usr/share/man \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
