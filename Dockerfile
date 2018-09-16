@@ -15,7 +15,7 @@ RUN ln -s /usr/bin/python3 /usr/bin/python
 RUN mkdir /run/sshd && \
     chmod 0755 /run/sshd
 
-RUN useradd --home-dir /gitlab --create-home gitlab
+RUN useradd --home-dir /gitlab --create-home --groups sudo --shell /bin/bash gitlab
 WORKDIR /gitlab
 # https://github.com/hadolint/hadolint/wiki/DL4006
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
