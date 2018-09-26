@@ -2,6 +2,7 @@ FROM ubuntu:18.04
 LABEL maintainer="Thomas Steinbach"
 
 RUN apt-get update \
+    && apt-get upgrade -y \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
          python3 \
          sudo \
