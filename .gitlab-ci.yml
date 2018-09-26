@@ -14,6 +14,7 @@ hadolint:
   stage: lint
   image: hadolint/hadolint:latest-debian 
   script: hadolint
+            --ignore DL3005
             --ignore DL3007
             --ignore DL3008
             --ignore SC2016
